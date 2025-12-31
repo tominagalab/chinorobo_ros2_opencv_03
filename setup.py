@@ -21,6 +21,9 @@ setup(
     entry_points={
         'console_scripts': [
         'image_proc_node = chinorobo_ros2_opencv_03.image_proc_node:main',
+        'color2grayscale_node = chinorobo_ros2_opencv_03.color2grayscale:main',
+        'face_detection_node = chinorobo_ros2_opencv_03.face_detection:main',
+        'face_mosaic_node = chinorobo_ros2_opencv_03.face_mosaic:main',
         ],
     },
 )
