@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-        'color2grayscale_node = chinorobo_ros2_opencv_03.color2grayscale:main',
+        'image_proc_node = chinorobo_ros2_opencv_03.image_proc_node:main',
         ],
     },
 )

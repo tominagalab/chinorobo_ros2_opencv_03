@@ -6,12 +6,12 @@ import cv2
 import numpy as np
 
 # ノード名
-NODE_NAME = 'color2grayscale_node'  # 必要に応じて変更すること
+NODE_NAME = 'image_proc_node'  # 必要に応じて変更すること
 
 # 入力画像のエンコーディング形式
 SUBSCRIBE_IMGMSG_ENCODING = 'bgr8' # 必要に応じて変更すること
 # 出力画像のエンコーディング形式
-PUBLISH_IMGMSG_ENCODING = 'mono8' # 必要に応じて変更すること
+PUBLISH_IMGMSG_ENCODING = 'bgr8' # 必要に応じて変更すること
 
 # トピック名
 SUBSCRIBE_TOPIC = '/image_src' # 変更しないこと
