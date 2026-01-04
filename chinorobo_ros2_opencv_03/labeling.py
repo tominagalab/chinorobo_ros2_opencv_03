@@ -9,13 +9,13 @@ import numpy as np
 NODE_NAME = 'labeling_node'  # 必要に応じて変更すること
 
 # 入力画像のエンコーディング形式
-SUBSCRIBE_IMGMSG_ENCODING = 'bgr8' # 必要に応じて変更すること
+SUBSCRIBE_IMGMSG_ENCODING = 'mono8' # 必要に応じて変更すること
 # 出力画像のエンコーディング形式
 PUBLISH_IMGMSG_ENCODING = 'bgr8' # 必要に応じて変更すること
 
 # トピック名
-SUBSCRIBE_TOPIC = '/image_src' # 変更しないこと
-PUBLISH_TOPIC = '/image_dst' # 変更しないこと
+SUBSCRIBE_TOPIC = '/image_bin' # 変更しないこと
+PUBLISH_TOPIC = '/image_labelled' # 変更しないこと
 
 cv_bridge = None
 publisher_image_dst = None
@@ -23,7 +23,13 @@ subscriber_image_src = None
 
 def image_proc(src):
     # ここに画像処理コードを追加
-    dst = src
+    # ラベリング処理の例
+    retval, labels, stats, centroids = cv2.connectedComponentsWithStats(src)
+    # ラベル結果を赤色矩形で表示
+    dst = cv2.cvtColor(src, cv2.COLOR_GRAY2BGR)
+    for i in range(1, retval):
+        x, y, w, h = stats[i][0], stats[i][1], stats[i][2], stats[i][3]
+        cv2.rectangle(dst, (x, y), (x + w, y + h), (0, 0, 255), 2)
     return dst
 
 def image_proc_callback(msg):
