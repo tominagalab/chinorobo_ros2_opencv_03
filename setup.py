@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
         'image_proc_node = chinorobo_ros2_opencv_03.image_proc_node:main',
         'color_filter_node = chinorobo_ros2_opencv_03.color_filter:main',
+        'labeling_node = chinorobo_ros2_opencv_03.labeling:main',
         ],
     },
 )
