@@ -33,7 +33,7 @@ def image_proc(src):
     dst = cv2.cvtColor(src, cv2.COLOR_GRAY2BGR)
     for i in range(1, retval):
         x, y, w, h = stats[i][0], stats[i][1], stats[i][2], stats[i][3]
-        cv2.rectangle(dst, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.rectangle(cv_raw, (x, y), (x + w, y + h), (0, 0, 255), 2)
     return dst
 
 def image_raw_callback(msg):
