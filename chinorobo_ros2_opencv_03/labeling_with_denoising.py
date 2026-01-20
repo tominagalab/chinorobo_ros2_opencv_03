@@ -23,6 +23,8 @@ publisher_image_dst = None
 subscriber_image_src = None
 subscriber_image_raw = None # 追加
 
+cv_raw = None # 追加
+
 def image_proc(src):
     # ここに画像処理コードを追加
     # ラベリング処理の例
@@ -33,6 +35,16 @@ def image_proc(src):
         x, y, w, h = stats[i][0], stats[i][1], stats[i][2], stats[i][3]
         cv2.rectangle(dst, (x, y), (x + w, y + h), (0, 0, 255), 2)
     return dst
+
+def image_raw_callback(msg):
+    global cv_raw
+    # 画像メッセージをOpenCVの画像形式（NumPy配列）に変換
+    try:
+        # カラー画像として変換 (bgr8形式を想定)
+        cv_raw = cv_bridge.imgmsg_to_cv2(msg, desired_encoding=SUBSCRIBE_IMGMSG_ENCODING)
+    except Exception as e:
+        rclpy.logging.get_logger(NODE_NAME).error(f'CvBridge変換エラー: {e}')
+        return
 
 def image_proc_callback(msg):
   # 画像メッセージをOpenCVの画像形式（NumPy配列）に変換
@@ -82,7 +94,7 @@ def main(args=None):
   subscriber_image_raw = node.create_subscription(
       Image,
       SUBSCRIBE_TOPIC_RAW,
-      image_proc_callback,
+      image_raw_callback,
       10
   )
   
